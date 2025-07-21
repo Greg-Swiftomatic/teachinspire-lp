@@ -2,7 +2,7 @@
     <component
         :is="linkTag"
         v-bind="properties"
-        class="ww-image-basic"
+        class="ww-image-basic ww-hover-scale"
         ww-responsive="ww-image-basic"
         :style="style"
         :class="{ '-link': hasLink && !isEditing }"

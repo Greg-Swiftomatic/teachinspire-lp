@@ -1,7 +1,7 @@
 <template>
     <component
         :is="tag"
-        class="ww-button"
+        class="ww-button ww-hover-lift"
         :class="{ button: tag, '-link': hasLink && !isEditing, active: isActive }"
         :type="buttonType"
         :style="buttonStyle"

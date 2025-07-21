@@ -5,7 +5,7 @@
         class="ww-flexbox"
         ww-responsive="wwLayoutSlot"
         v-bind="properties"
-        :class="{ '-link': hasLink && !isEditing }"
+        :class="{ '-link': hasLink && !isEditing, 'ww-hover-lift': hasLink && !isEditing }"
     >
         <slot></slot>
     </wwSimpleLayout>
@@ -18,7 +18,7 @@
         ww-responsive="wwLayout"
         :tag="tag"
         v-bind="properties"
-        :class="{ '-link': hasLink && !isEditing }"
+        :class="{ '-link': hasLink && !isEditing, 'ww-hover-lift': hasLink && !isEditing }"
     >
         <template #header>
             <wwBackgroundVideo v-if="backgroundVideo" :video="backgroundVideo"></wwBackgroundVideo>

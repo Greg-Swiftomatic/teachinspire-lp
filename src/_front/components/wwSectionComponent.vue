@@ -42,7 +42,7 @@
 </template>
 
 <script>
- import { provide, ref, computed, toRef, reactive, inject, shallowRef, watch } from 'vue';
+ import { provide, ref, computed, toRef, reactive, inject, shallowRef, watch, onMounted, onUnmounted } from 'vue';
 
 import {
     getComponentIcon,
@@ -133,7 +133,57 @@ export default {
         useComponentAdvancedInteractions(state, wwLib.$store.getters['websiteData/getPageId']);
         useComponentActions({ uid: props.uid, type: 'section' }, { configuration, componentRef: component });
 
- 
+        // Animation setup
+        const animationObserver = ref(null);
+        const animationClass = ref('');
+        
+        const getAnimationClass = (sectionIndex) => {
+            const animations = ['animate-fade-in-up', 'animate-fade-in-left', 'animate-fade-in-right', 'animate-fade-in', 'animate-scale-in'];
+            return animations[sectionIndex % animations.length];
+        };
+
+        onMounted(() => {
+            if (rootElement.value) {
+                // Add initial animation class based on section index
+                animationClass.value = getAnimationClass(props.index);
+                
+                // Create intersection observer for scroll animations
+                animationObserver.value = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('ww-animate-visible', animationClass.value);
+                                // Add staggered animation to child elements
+                                const elements = entry.target.querySelectorAll('.ww-element, .ww-layout-item');
+                                elements.forEach((el, index) => {
+                                    el.classList.add('ww-animate');
+                                    if (index > 0 && index <= 6) {
+                                        el.classList.add(`ww-animate-delay-${index}`);
+                                    }
+                                    setTimeout(() => {
+                                        el.classList.add('ww-animate-visible', 'animate-fade-in-up');
+                                    }, index * 100);
+                                });
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+
+                rootElement.value.classList.add('ww-animate');
+                animationObserver.value.observe(rootElement.value);
+            }
+        });
+
+        onUnmounted(() => {
+            if (animationObserver.value) {
+                animationObserver.value.disconnect();
+            }
+        });
+
         return {
             rootElement,
             component,
