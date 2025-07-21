@@ -1,5 +1,5 @@
 <template>
-    <wwLayout path="wwObjects" class="section-base"></wwLayout>
+    <wwLayout path="wwObjects" class="section-base premium-bg-texture"></wwLayout>
 </template>
 
 <script>

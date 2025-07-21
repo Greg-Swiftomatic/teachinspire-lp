@@ -158,3 +158,147 @@ html {
 .ww-animate-delay-4 { animation-delay: 0.4s; }
 .ww-animate-delay-5 { animation-delay: 0.5s; }
 .ww-animate-delay-6 { animation-delay: 0.6s; }
+
+/* Premium Design System */
+:root {
+  /* Brand Colors */
+  --bg-primary: #f8f7f2;    /* Creamy paper background */
+  --text-primary: #2c3d57;  /* Deep navy text */
+  --accent: #85a2a3;        /* Blue-gray accent */
+  --cta: #f1d263;           /* Muted yellow for CTAs */
+  --white: #ffffff;         /* Pure white */
+  --separator: #85a2a3;     /* Dashed line color */
+  
+  /* Premium Typography Scale */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Hero Section Typography - Premium Sizes */
+  --hero-title-size: 64px;
+  --hero-title-size-tablet: 48px;
+  --hero-title-size-mobile: 36px;
+  --hero-title-line-height: 1.1;
+  
+  --hero-subtitle-size: 42px;
+  --hero-subtitle-size-tablet: 32px;
+  --hero-subtitle-size-mobile: 24px;
+  --hero-subtitle-line-height: 1.2;
+  
+  --hero-description-size: 20px;
+  --hero-description-size-tablet: 18px;
+  --hero-description-size-mobile: 16px;
+  --hero-description-line-height: 1.6;
+  
+  /* Spacing System */
+  --section-padding: 80px;
+  --content-max-width: 1200px;
+}
+
+/* Premium Typography Classes */
+.premium-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--hero-title-size);
+  line-height: var(--hero-title-line-height);
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  text-rendering: optimizeLegibility;
+}
+
+.premium-hero-subtitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--hero-subtitle-size);
+  line-height: var(--hero-subtitle-line-height);
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+}
+
+.premium-hero-description {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--hero-description-size);
+  line-height: var(--hero-description-line-height);
+  color: var(--text-primary);
+  max-width: 700px;
+  letter-spacing: -0.005em;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .premium-hero-title {
+    font-size: var(--hero-title-size-tablet);
+  }
+  
+  .premium-hero-subtitle {
+    font-size: var(--hero-subtitle-size-tablet);
+  }
+  
+  .premium-hero-description {
+    font-size: var(--hero-description-size-tablet);
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-hero-title {
+    font-size: var(--hero-title-size-mobile);
+  }
+  
+  .premium-hero-subtitle {
+    font-size: var(--hero-subtitle-size-mobile);
+  }
+  
+  .premium-hero-description {
+    font-size: var(--hero-description-size-mobile);
+  }
+}
+
+/* Subtle background texture */
+.premium-bg-texture {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(44, 61, 87, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(133, 162, 163, 0.03) 0%, transparent 50%);
+  background-size: 100px 100px, 80px 80px;
+  position: relative;
+}
+
+.premium-bg-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(45deg, rgba(248, 247, 242, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(248, 247, 242, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(248, 247, 242, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(248, 247, 242, 0.05) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Premium accent colors for animated elements */
+.premium-accent-red {
+  color: #e74c3c;
+  text-decoration: line-through;
+  text-decoration-color: #e74c3c;
+}
+
+.premium-accent-yellow {
+  color: var(--cta);
+  font-weight: 600;
+}
+
+/* Enhanced hover states for premium feel */
+.premium-hover-subtle {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-hover-subtle:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
