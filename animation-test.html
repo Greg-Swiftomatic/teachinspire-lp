@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Animations Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="src/assets/css/common.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f2;
+            color: #2c3d57;
+            line-height: 1.6;
+        }
+        
+        .test-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+        
+        .test-hero {
+            text-align: center;
+            background: linear-gradient(135deg, #f8f7f2 0%, #e5e2de 100%);
+        }
+        
+        .test-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .test-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(45deg, #85a2a3, #f1d263);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        
+        .cta-button {
+            background: #f1d263;
+            color: #2c3d57;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .test-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            h1 { font-size: 48px; }
+            h2 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="test-section test-hero" data-section-id="hero">
+        <h1>Premium Animation Showcase</h1>
+        <p style="font-size: 20px; max-width: 600px; margin: 0 auto;">Experience smooth, elegant animations that bring your content to life with professional polish and sophisticated timing.</p>
+        <a href="#content" class="cta-button">Discover the Magic</a>
+    </section>
+
+    <!-- Content Section 1 -->
+    <section class="test-section">
+        <div class="test-content">
+            <div>
+                <h2>Smooth Text Reveals</h2>
+                <p>Watch as text elegantly fades in with premium timing and sophisticated easing. Each word appears with precision, creating a professional and engaging reading experience that captivates your audience.</p>
+                <p>Our innovative animation system uses advanced CSS transforms and carefully crafted JavaScript to deliver breakthrough performance across all devices.</p>
+            </div>
+            <div class="test-image">Image Animation Demo</div>
+        </div>
+    </section>
+
+    <!-- Content Section 2 -->
+    <section class="test-section">
+        <div class="test-content">
+            <div class="test-image">Parallax Effect Demo</div>
+            <div>
+                <h2>Elegant Image Entrances</h2>
+                <p>Images slide in with luxury-grade animations featuring blur effects, scale transforms, and smooth opacity transitions. Each image tells its own story through motion.</p>
+                <p>The cutting-edge parallax effects and clip-path reveals create an exclusive viewing experience that sets your content apart from the competition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section 3 -->
+    <section class="test-section">
+        <div class="test-content">
+            <div>
+                <h2>Professional Polish</h2>
+                <p>Every animation is crafted with premium attention to detail, featuring custom easing curves, staggered delays, and responsive performance optimization.</p>
+                <p>Transform your static content into an interactive masterpiece that engages visitors and creates memorable experiences.</p>
+                <a href="#" class="cta-button">Start Your Transformation</a>
+            </div>
+            <div class="test-image">Interactive Demo</div>
+        </div>
+    </section>
+
+    <!-- Load Animation Script -->
+    <script src="src/assets/js/premium-animations.js"></script>
+</body>
+</html>

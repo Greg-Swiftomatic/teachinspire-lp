@@ -727,6 +727,221 @@ img {
     }
 }
 
+/* ADVANCED TEXT ANIMATIONS */
+
+/* Word-by-word reveal animation */
+@keyframes wordReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) rotateX(90deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+    }
+}
+
+/* Character-by-character typing effect */
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blinkCursor {
+    from, to {
+        border-right-color: transparent;
+    }
+    50% {
+        border-right-color: var(--text-primary, #2c3d57);
+    }
+}
+
+/* Gradient text reveal */
+@keyframes gradientReveal {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+/* Premium Text Animation Classes */
+.premium-word-reveal {
+    display: inline-block;
+    opacity: 0;
+    animation: wordReveal 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--text-primary, #2c3d57);
+    white-space: nowrap;
+    animation: typewriter 2s steps(40, end), blinkCursor 1s step-end infinite;
+}
+
+.premium-gradient-text {
+    background: linear-gradient(
+        90deg,
+        var(--text-primary, #2c3d57) 0%,
+        var(--accent, #85a2a3) 25%,
+        var(--cta, #f1d263) 50%,
+        var(--accent, #85a2a3) 75%,
+        var(--text-primary, #2c3d57) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientReveal 3s ease-in-out infinite alternate;
+}
+
+.premium-highlight-reveal {
+    position: relative;
+    display: inline-block;
+}
+
+.premium-highlight-reveal::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--cta, #f1d263);
+    animation: highlightExpand 1.2s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes highlightExpand {
+    to {
+        width: 100%;
+    }
+}
+
+/* Text stagger animations */
+.text-stagger-1 { animation-delay: 0.1s; }
+.text-stagger-2 { animation-delay: 0.2s; }
+.text-stagger-3 { animation-delay: 0.3s; }
+.text-stagger-4 { animation-delay: 0.4s; }
+.text-stagger-5 { animation-delay: 0.5s; }
+.text-stagger-6 { animation-delay: 0.6s; }
+.text-stagger-7 { animation-delay: 0.7s; }
+.text-stagger-8 { animation-delay: 0.8s; }
+
+/* ADVANCED IMAGE ANIMATIONS */
+
+/* Parallax-style image reveal */
+@keyframes parallaxReveal {
+    from {
+        opacity: 0;
+        transform: translateY(100px) scale(1.2);
+        filter: blur(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* Clip path reveal animation */
+@keyframes clipReveal {
+    from {
+        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+    }
+    to {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+/* Image focus effect */
+@keyframes focusReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur(10px) brightness(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0) brightness(1);
+    }
+}
+
+/* Premium Image Animation Classes */
+.premium-parallax-reveal {
+    opacity: 0;
+    animation: parallaxReveal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-clip-reveal {
+    animation: clipReveal 1.2s ease-out forwards;
+}
+
+.premium-focus-reveal {
+    opacity: 0;
+    animation: focusReveal 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Image hover enhancements */
+.premium-image-hover {
+    overflow: hidden;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-image-hover img {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-image-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 80px rgba(44, 61, 87, 0.15);
+}
+
+.premium-image-hover:hover img {
+    transform: scale(1.08);
+}
+
+/* SECTION TRANSITIONS */
+
+/* Smooth section dividers */
+.premium-section-divider {
+    position: relative;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.premium-section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--accent, #85a2a3) 20%, 
+        var(--cta, #f1d263) 50%, 
+        var(--accent, #85a2a3) 80%, 
+        transparent 100%
+    );
+    transform: translate(-50%, -50%);
+    animation: dividerExpand 2s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes dividerExpand {
+    to {
+        width: 100%;
+    }
+}
+
 /* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
     .premium-section-animate,
@@ -737,16 +952,36 @@ img {
     .scroll-reveal-left,
     .scroll-reveal-right,
     .premium-float,
-    .premium-glow-pulse {
-        animation: none;
+    .premium-glow-pulse,
+    .premium-word-reveal,
+    .premium-typewriter,
+    .premium-gradient-text,
+    .premium-parallax-reveal,
+    .premium-clip-reveal,
+    .premium-focus-reveal {
+        animation: none !important;
         transition: opacity 0.3s ease;
     }
     
     .premium-section-animate.visible,
     .scroll-reveal.revealed,
     .scroll-reveal-left.revealed,
-    .scroll-reveal-right.revealed {
+    .scroll-reveal-right.revealed,
+    .premium-word-reveal,
+    .premium-parallax-reveal,
+    .premium-clip-reveal,
+    .premium-focus-reveal {
         opacity: 1;
         transform: none;
+        clip-path: none;
+    }
+    
+    .premium-typewriter {
+        border-right: none;
+        white-space: normal;
+    }
+    
+    .premium-gradient-text {
+        -webkit-text-fill-color: var(--text-primary, #2c3d57);
     }
 }
