@@ -48,6 +48,114 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Tighter spacing for hero subtitle elements */
+#hero_animated_word {
+    margin-bottom: 4px !important;
+}
+
+/* Reduce gap in hero subtitle container */
+.ww-object[data-name="Hero Subtitle Container"] {
+    margin-bottom: 8px !important;
+}
+
+/* Two-column hero layout - using more specific selectors */
+[data-name="Hero Content"], 
+.ww-object[name="Hero Content"],
+div[role="main"] .ww-object:has(> *[data-name*="Hero"]) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    align-items: center !important;
+    max-width: 1200px !important;
+}
+
+/* Force grid on hero container by ID if needed */
+#hero-container,
+.hero-section .ww-object,
+/* Target the hero section directly */
+section[data-section-id="ac0b1e8c-2363-41b1-9daa-49d580bb8c6f"] .ww-object:first-child {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    align-items: center !important;
+}
+
+/* Backup: force grid on any container with 5 children (4 text + 1 image) */
+.ww-object:has(> :nth-child(5)):has(> img[src*="513fa36c"]) {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    align-items: center !important;
+}
+
+/* Direct targeting by UUID - most aggressive approach */
+[data-ww-object-uid="6622e1cb-01a9-4f75-834f-da1267d99760"] {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 48px !important;
+    align-items: center !important;
+    max-width: 1200px !important;
+}
+
+/* Position text elements in left column - target all children except image */
+[data-name="Hero Content"] > :not([data-name*="Hourglass"]):not(img) {
+    grid-column: 1 !important;
+}
+
+/* Position hourglass image in right column with optimal sizing */
+[data-name*="Hero Hourglass"],
+[data-name*="Hourglass"],
+img[alt*="Hourglass"],
+img[src*="513fa36c-80bd-4015-140b-4b42ca020b00"] {
+    grid-column: 2 !important;
+    grid-row: 1 / -1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    max-width: 450px !important;
+    height: auto !important;
+    order: 2 !important;
+}
+
+/* Left-align hero text on desktop */
+.ww-object[data-name="Hero Content"] {
+    text-align: left !important;
+}
+
+.ww-object[data-name="Hero Content"] .ww-text {
+    text-align: left !important;
+}
+
+.ww-object[data-name="Hero Subtitle Container"] {
+    align-items: flex-start !important;
+}
+
+/* Mobile responsive: stack vertically */
+@media (max-width: 768px) {
+    .ww-object[data-name="Hero Content"] {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        text-align: center !important;
+    }
+    
+    .ww-object[data-name="Hero Content"] > .ww-object {
+        grid-column: 1 !important;
+    }
+    
+    .ww-object[data-name="Hero Content"] .ww-text {
+        text-align: center !important;
+    }
+    
+    .ww-object[data-name="Hero Subtitle Container"] {
+        align-items: center !important;
+    }
+    
+    .ww-object[data-name="Hero Hourglass Image"] {
+        order: -1 !important;
+        max-width: 300px !important;
+        margin: 0 auto 24px auto !important;
+    }
+}
+
 /* Animation keyframes */
 @keyframes fadeInUp {
     from {
