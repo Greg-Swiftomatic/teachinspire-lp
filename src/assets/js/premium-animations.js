@@ -34,45 +34,95 @@ class PremiumScrollAnimations {
     }
 
     findAnimatableElements() {
-        // Find all sections and major content blocks
-        const sections = document.querySelectorAll('section, .ww-section, [data-section-id]');
-        const textElements = document.querySelectorAll('.ww-text, h1, h2, h3, p');
-        const imageElements = document.querySelectorAll('img, .ww-image');
-        const cardElements = document.querySelectorAll('.ww-card, .premium-card');
+        // Target specific WeWeb sections by their UIDs and structure
+        const weBebSections = document.querySelectorAll(
+            '[data-ww-name*="Section"], .ww-section, section, [data-section-id], ' +
+            '[data-ww-uid="1b0b31e0-8a1d-4c98-9562-2a7bffd7b340"], ' + // Problem Section
+            '[data-ww-uid="7e236026-ae26-43c1-b165-0a64b12a6d75"], ' + // Solution Section  
+            '[data-ww-uid="a823c108-9097-4a2a-a8cd-8505c1ef1cc9"], ' + // About Section
+            '[data-ww-uid="eeca3349-b596-4f42-8363-38d479ae30ba"], ' + // Training Section
+            '[data-ww-uid="c7ba5dc1-c233-4dd9-bcdb-39a1d7642e7e"], ' + // Community Section
+            '[data-ww-uid="1fb36b5f-587e-46f8-8fd2-f32ec4a7913c"], ' + // Guarantees Section
+            '[data-ww-uid="2225af1a-6129-4282-9fbe-35e98a57ccee"], ' + // Format Section
+            '[data-ww-uid="71aef82d-8d34-45b3-bdf7-1310e073766c"], ' + // Pricing Section
+            '[data-ww-uid="33abbee2-21ea-439c-afe7-322d23c08713"]'     // CTA Section
+        );
+        
+        // WeWeb text elements
+        const textElements = document.querySelectorAll(
+            '.ww-text, .ww-heading, [data-ww-name*="Text"], [data-ww-name*="Heading"], ' +
+            'h1, h2, h3, h4, p, [data-ww-component="text"]'
+        );
+        
+        // WeWeb image elements
+        const imageElements = document.querySelectorAll(
+            'img, .ww-image, [data-ww-name*="Image"], [data-ww-component="image"], ' +
+            '.ww-background-image, [data-ww-name*="Picture"]'
+        );
+        
+        // WeWeb interactive elements
+        const interactiveElements = document.querySelectorAll(
+            '.ww-button, [data-ww-component="button"], [data-ww-name*="Button"], ' +
+            '.ww-card, [data-ww-name*="Card"], [role="button"]'
+        );
 
-        // Add scroll reveal classes based on element type and position
-        sections.forEach((section, index) => {
-            if (!section.classList.contains('premium-hero-section')) {
-                section.classList.add('scroll-reveal');
-                if (index % 2 === 0) {
-                    section.classList.add('scroll-reveal-left');
-                } else {
-                    section.classList.add('scroll-reveal-right');
-                }
+        // Apply animations based on section and content type
+        weBebSections.forEach((section, index) => {
+            const sectionName = section.getAttribute('data-ww-name') || section.tagName;
+            
+            // Skip hero section (handled separately)
+            if (section.getAttribute('data-ww-uid') === 'ac0b1e8c-2363-41b1-9daa-49d580bb8c6f') {
+                return;
+            }
+            
+            section.classList.add('scroll-reveal');
+            
+            // Alternate slide directions for visual variety
+            if (index % 2 === 0) {
+                section.classList.add('scroll-reveal-left');
+            } else {
+                section.classList.add('scroll-reveal-right');
             }
         });
 
+        // Apply text animations with staggered delays
         textElements.forEach((text, index) => {
-            if (!text.closest('.premium-hero-section')) {
-                text.classList.add('scroll-reveal');
-                text.classList.add(`stagger-${Math.min(index % 6 + 1, 6)}`);
+            // Skip hero text (handled separately)
+            if (text.closest('[data-ww-uid="ac0b1e8c-2363-41b1-9daa-49d580bb8c6f"]')) {
+                return;
             }
+            
+            text.classList.add('scroll-reveal');
+            text.classList.add(`stagger-${Math.min(index % 6 + 1, 6)}`);
         });
 
+        // Apply image animations with variety
         imageElements.forEach((img, index) => {
-            if (!img.closest('.premium-hero-section')) {
-                img.classList.add('scroll-reveal');
-                img.classList.add('premium-image-slide');
-                img.classList.add(`premium-image-delay-${Math.min(index % 3 + 1, 3)}`);
+            if (img.closest('[data-ww-uid="ac0b1e8c-2363-41b1-9daa-49d580bb8c6f"]')) {
+                return;
             }
+            
+            img.classList.add('scroll-reveal');
+            
+            // Vary animation types for visual interest
+            const animationType = index % 3;
+            if (animationType === 0) {
+                img.classList.add('premium-parallax-reveal');
+            } else if (animationType === 1) {
+                img.classList.add('premium-clip-reveal');
+            } else {
+                img.classList.add('premium-focus-reveal');
+            }
+            
+            img.classList.add(`premium-image-delay-${Math.min(index % 3 + 1, 3)}`);
         });
 
         // Store all elements for observation
         this.elements = [
-            ...Array.from(sections),
+            ...Array.from(weBebSections),
             ...Array.from(textElements),
             ...Array.from(imageElements),
-            ...Array.from(cardElements)
+            ...Array.from(interactiveElements)
         ].filter(el => el.classList.contains('scroll-reveal') || 
                       el.classList.contains('scroll-reveal-left') || 
                       el.classList.contains('scroll-reveal-right'));
@@ -95,8 +145,8 @@ class PremiumScrollAnimations {
     }
 
     addInitialAnimations() {
-        // Add hero section animation on page load
-        const heroSection = document.querySelector('[data-section-id], .ww-section:first-child');
+        // Target WeWeb hero section specifically
+        const heroSection = document.querySelector('[data-ww-uid="ac0b1e8c-2363-41b1-9daa-49d580bb8c6f"]');
         if (heroSection) {
             heroSection.classList.add('premium-hero-section');
             
@@ -104,41 +154,37 @@ class PremiumScrollAnimations {
             this.setupWordReveal(heroSection);
         }
 
-        // Add floating animation to special images (like logos, icons)
-        const floatingElements = document.querySelectorAll('[data-name*="Hourglass"], .ww-image[src*="icon"]');
-        floatingElements.forEach(element => {
-            element.classList.add('premium-float');
-        });
+        // Add floating animation to the hourglass image in hero
+        const hourglassImage = document.querySelector('[data-name*="Hourglass"], img[src*="513fa36c"], [data-ww-name*="Hourglass"]');
+        if (hourglassImage) {
+            hourglassImage.classList.add('premium-float');
+        }
 
-        // Add glow pulse to CTA buttons
-        const ctaButtons = document.querySelectorAll('[data-name*="CTA"], .ww-button[style*="f1d263"]');
+        // Add glow pulse to CTA buttons (pricing and CTA sections)
+        const ctaButtons = document.querySelectorAll(
+            '[data-ww-uid="71aef82d-8d34-45b3-bdf7-1310e073766c"] .ww-button, ' + // Pricing CTA
+            '[data-ww-uid="33abbee2-21ea-439c-afe7-322d23c08713"] .ww-button, ' + // CTA Section
+            '.ww-button[style*="f1d263"], [data-ww-name*="CTA"]'
+        );
         ctaButtons.forEach(button => {
             button.classList.add('premium-glow-pulse');
+            // Add calendar click handler
+            this.addCalendarIntegration(button);
         });
 
-        // Add elegant hover effects to interactive elements
-        const interactiveElements = document.querySelectorAll('.ww-button, .ww-card, [role="button"]');
+        // Add elegant hover effects to all WeWeb interactive elements
+        const interactiveElements = document.querySelectorAll(
+            '.ww-button, [data-ww-component="button"], .ww-card, [role="button"], ' +
+            '[data-ww-name*="Button"], [data-ww-name*="Card"]'
+        );
         interactiveElements.forEach(element => {
             element.classList.add('premium-hover-elegant');
         });
 
-        // Add enhanced image hover effects
-        const hoverImages = document.querySelectorAll('.ww-image, [data-name*="Image"]');
-        hoverImages.forEach(img => {
+        // Enhanced hover effects for images
+        const images = document.querySelectorAll('img, .ww-image, [data-ww-component="image"]');
+        images.forEach(img => {
             img.classList.add('premium-image-hover');
-        });
-
-        // Add different image reveal animations based on position
-        const images = document.querySelectorAll('img');
-        images.forEach((img, index) => {
-            const animationType = index % 3;
-            if (animationType === 0) {
-                img.classList.add('premium-parallax-reveal');
-            } else if (animationType === 1) {
-                img.classList.add('premium-clip-reveal');
-            } else {
-                img.classList.add('premium-focus-reveal');
-            }
         });
 
         // Add section dividers between major sections
@@ -146,6 +192,49 @@ class PremiumScrollAnimations {
         
         // Setup special text effects for key phrases
         this.setupSpecialTextEffects();
+        
+        // Add calendar integration to existing calendar icons
+        this.setupCalendarIntegration();
+    }
+
+    addCalendarIntegration(button) {
+        // Add calendar functionality to CTA buttons
+        const calendarUrl = 'https://cal.com/greg-teachinspire/decouverte-teachinspire?overlayCalendar=true';
+        
+        button.addEventListener('click', (e) => {
+            // Check if it's meant to be a calendar CTA (has calendar icon or specific text)
+            const hasCalendarIcon = button.querySelector('[data-lucide="calendar"]') || 
+                                  button.querySelector('.lucide-calendar') ||
+                                  button.textContent.toLowerCase().includes('rendez-vous') ||
+                                  button.textContent.toLowerCase().includes('découverte') ||
+                                  button.textContent.toLowerCase().includes('contact');
+            
+            if (hasCalendarIcon) {
+                e.preventDefault();
+                window.open(calendarUrl, '_blank', 'width=800,height=600');
+            }
+        });
+    }
+
+    setupCalendarIntegration() {
+        // Find all calendar-related elements and convert them to booking links
+        const calendarElements = document.querySelectorAll(
+            '[data-lucide="calendar"], .lucide-calendar, ' +
+            '[data-ww-name*="Calendar"], [data-ww-name*="Booking"]'
+        );
+        
+        const calendarUrl = 'https://cal.com/greg-teachinspire/decouverte-teachinspire?overlayCalendar=true';
+        
+        calendarElements.forEach(element => {
+            // Make calendar icons clickable
+            element.style.cursor = 'pointer';
+            element.addEventListener('click', () => {
+                window.open(calendarUrl, '_blank', 'width=800,height=600');
+            });
+            
+            // Add premium hover animation
+            element.classList.add('premium-hover-scale-smooth');
+        });
     }
 
     setupWordReveal(container) {

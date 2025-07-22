@@ -496,6 +496,148 @@ img {
     }
 }
 
+/* PRODUCTION PERFORMANCE OPTIMIZATIONS */
+
+/* GPU acceleration for animated elements */
+.scroll-reveal,
+.scroll-reveal-left,
+.scroll-reveal-right,
+.premium-text-reveal,
+.premium-image-reveal,
+.premium-image-slide,
+.premium-hover-elegant,
+.premium-hover-scale-smooth,
+.premium-float,
+.premium-glow-pulse {
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Remove will-change after animations complete */
+.scroll-reveal.revealed,
+.premium-text-reveal,
+.premium-image-reveal,
+.premium-image-slide {
+    will-change: auto;
+}
+
+/* Optimize for touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .premium-hover-elegant:hover,
+    .premium-hover-scale-smooth:hover,
+    .premium-image-hover:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    /* Reduce animation complexity on touch devices */
+    .premium-float {
+        animation-duration: 8s; /* Slower for battery life */
+    }
+}
+
+/* Critical path optimization */
+.ww-section,
+.ww-text,
+.ww-image,
+.ww-button {
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Preload critical fonts */
+@font-face {
+    font-family: 'Inter';
+    font-display: swap;
+    src: local('Inter');
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-display: swap;
+    src: local('Playfair Display');
+}
+
+/* WEWEB-SPECIFIC PREMIUM ANIMATIONS */
+
+/* WeWeb Section Animations */
+.ww-section {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* WeWeb Button Enhancements */
+.ww-button {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.ww-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: 1;
+}
+
+.ww-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* WeWeb Text Element Enhancements */
+.ww-text {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* WeWeb Image Optimizations */
+.ww-image img {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hero Section Specific Animations */
+[data-ww-uid="ac0b1e8c-2363-41b1-9daa-49d580bb8c6f"] {
+    animation: sectionFadeInUp 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Calendar Icon Styling */
+[data-lucide="calendar"], .lucide-calendar {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+[data-lucide="calendar"]:hover, .lucide-calendar:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Section-Specific Optimizations */
+[data-ww-uid="1b0b31e0-8a1d-4c98-9562-2a7bffd7b340"] { /* Problem */
+    animation-delay: 0.2s;
+}
+
+[data-ww-uid="7e236026-ae26-43c1-b165-0a64b12a6d75"] { /* Solution */
+    animation-delay: 0.4s;
+}
+
+[data-ww-uid="a823c108-9097-4a2a-a8cd-8505c1ef1cc9"] { /* About */
+    animation-delay: 0.6s;
+}
+
+[data-ww-uid="71aef82d-8d34-45b3-bdf7-1310e073766c"] { /* Pricing */
+    animation-delay: 0.8s;
+}
+
+[data-ww-uid="33abbee2-21ea-439c-afe7-322d23c08713"] { /* CTA */
+    animation-delay: 1s;
+}
+
 /* PREMIUM SCROLL-TRIGGERED ANIMATIONS */
 
 /* Section Reveal Animations */
