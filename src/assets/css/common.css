@@ -495,3 +495,258 @@ img {
         image-rendering: crisp-edges;
     }
 }
+
+/* PREMIUM SCROLL-TRIGGERED ANIMATIONS */
+
+/* Section Reveal Animations */
+@keyframes sectionFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sectionSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes sectionSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes textRevealUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes imageZoomFade {
+    from {
+        opacity: 0;
+        transform: scale(1.1);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes imageSlideScale {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes subtleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(241, 210, 99, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(241, 210, 99, 0.5);
+    }
+}
+
+/* Premium Section Animation Classes */
+.premium-section-animate {
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-section-animate.visible {
+    opacity: 1;
+}
+
+/* Text Animation Classes */
+.premium-text-reveal {
+    opacity: 0;
+    animation: textRevealUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-text-reveal-delay-1 { animation-delay: 0.2s; }
+.premium-text-reveal-delay-2 { animation-delay: 0.4s; }
+.premium-text-reveal-delay-3 { animation-delay: 0.6s; }
+.premium-text-reveal-delay-4 { animation-delay: 0.8s; }
+.premium-text-reveal-delay-5 { animation-delay: 1s; }
+
+/* Image Animation Classes */
+.premium-image-reveal {
+    opacity: 0;
+    animation: imageZoomFade 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-image-slide {
+    opacity: 0;
+    animation: imageSlideScale 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-image-delay-1 { animation-delay: 0.3s; }
+.premium-image-delay-2 { animation-delay: 0.5s; }
+.premium-image-delay-3 { animation-delay: 0.7s; }
+
+/* Section-Specific Animations */
+.premium-hero-section {
+    animation: sectionFadeInUp 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-content-left {
+    animation: sectionSlideInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.premium-content-right {
+    animation: sectionSlideInRight 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Continuous Animations for Special Elements */
+.premium-float {
+    animation: subtleFloat 6s ease-in-out infinite;
+}
+
+.premium-glow-pulse {
+    animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Enhanced Hover States */
+.premium-hover-elegant {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-hover-elegant:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(44, 61, 87, 0.15);
+}
+
+.premium-hover-scale-smooth {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.premium-hover-scale-smooth:hover {
+    transform: scale(1.03);
+}
+
+/* Scroll Reveal Base Classes */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger Delays for Sequential Reveals */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+.stagger-5 { transition-delay: 0.5s; }
+.stagger-6 { transition-delay: 0.6s; }
+
+/* Mobile-Optimized Animations */
+@media (max-width: 768px) {
+    .premium-text-reveal,
+    .premium-image-reveal,
+    .premium-image-slide,
+    .scroll-reveal,
+    .scroll-reveal-left,
+    .scroll-reveal-right {
+        animation-duration: 0.6s;
+        transition-duration: 0.6s;
+    }
+    
+    .premium-hover-elegant:hover {
+        transform: translateY(-3px);
+    }
+    
+    .subtleFloat {
+        animation-duration: 4s;
+    }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    .premium-section-animate,
+    .premium-text-reveal,
+    .premium-image-reveal,
+    .premium-image-slide,
+    .scroll-reveal,
+    .scroll-reveal-left,
+    .scroll-reveal-right,
+    .premium-float,
+    .premium-glow-pulse {
+        animation: none;
+        transition: opacity 0.3s ease;
+    }
+    
+    .premium-section-animate.visible,
+    .scroll-reveal.revealed,
+    .scroll-reveal-left.revealed,
+    .scroll-reveal-right.revealed {
+        opacity: 1;
+        transform: none;
+    }
+}
